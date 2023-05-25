@@ -349,8 +349,15 @@ WAIT 0
 									PRINT_NOW ( DRV3_9 ) 5000 0
                                     PRINT_BIG M_FAIL 5000 1
                                     SET_PLAYER_CONTROL player1 FALSE
-                                    WAIT 7500
-                                    SET_PLAYER_CONTROL player1 TRUE
+									WAIT 2000
+									DO_FADE 1000 FADE_OUT
+									WHILE GET_FADING_STATUS
+										WAIT 0
+									ENDWHILE
+									gosub reset_test
+									CLEAR_THIS_BIG_PRINT M_FAIL
+									CLEAR_PRINTS
+									DO_FADE 1000 FADE_IN
 									GOTO driv2_loop
 								ENDIF
 							ENDIF
@@ -381,6 +388,18 @@ GOTO driv2_loop
 
 
 // ********************************** Mission GOSUBS ************************************
+
+reset_test:
+gosub d2_destroy_ambushed_van_and_gang
+CLEAR_PRINTS
+d2_gang_created = 0
+d2_player_sniped_at_biker = 0
+d2_projectile_reached_area = 0
+SWITCH_WIDESCREEN OFF
+SET_CAMERA_BEHIND_PLAYER
+RESTORE_CAMERA_JUMPCUT
+SET_PLAYER_CONTROL player1 ON
+RETURN
 
 // *****************************************************************
 // 							 Deal cutscene
