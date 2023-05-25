@@ -355,7 +355,6 @@ WAIT 0
                                         WAIT 0
                                     ENDWHILE
                                     gosub reset_test
-                                    CLEAR_THIS_BIG_PRINT M_FAIL
                                     CLEAR_PRINTS
                                     DO_FADE 1000 FADE_IN
                                     GOTO driv2_loop
